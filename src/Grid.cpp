@@ -1,6 +1,6 @@
 #include "Grid.h"
 
-Grid::Grid(const u_int16_t height, const u_int16_t width, const float cellSize):
+Grid::Grid(const uint16_t height, const uint16_t width, const float cellSize):
     height {height},
     width {width},
     cellSize {cellSize},
@@ -50,17 +50,29 @@ void Grid::draw(sf::RenderWindow& window) {
 }
 
 void Grid::setWall(int mouseX, int mouseY) {
-
     if (mouseX < 0 || mouseY < 0) return;
 
     const auto indexX = static_cast<uint16_t>(mouseX / cellSize);
     const auto indexY = static_cast<uint16_t>(mouseY / cellSize);
 
-    if (indexX < width && indexY < height ) {
+    if (indexX < width && indexY < height) {
         Node& targetNode = nodes[indexY][indexX];
-
         if (&targetNode != startNode && &targetNode != endNode) {
-            targetNode.isWall = !targetNode.isWall;
+            targetNode.isWall = true;
+        }
+    }
+}
+
+void Grid::removeWall(int mouseX, int mouseY) {
+    if (mouseX < 0 || mouseY < 0) return;
+
+    const auto indexX = static_cast<uint16_t>(mouseX / cellSize);
+    const auto indexY = static_cast<uint16_t>(mouseY / cellSize);
+
+    if (indexX < width && indexY < height) {
+        Node& targetNode = nodes[indexY][indexX];
+        if (&targetNode != startNode && &targetNode != endNode) {
+            targetNode.isWall = false;
         }
     }
 }

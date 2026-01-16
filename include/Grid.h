@@ -15,13 +15,14 @@ private:
     Node* startNode;
     Node* endNode;
 public:
-    Grid(u_int16_t height, u_int16_t width, float cellSize);
+    Grid(uint16_t height, uint16_t width, float cellSize);
 
     Node* getStart() const { return startNode; }
     Node* getEnd() const { return endNode; }
 
     void draw(sf::RenderWindow& window);
     void setWall(int mouseX , int mouseY);
+    void removeWall(int mouseX, int mouseY);
     void setStart(int mouseX, int mouseY);
     void setEnd(int mouseX, int mouseY);
 

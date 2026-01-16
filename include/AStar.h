@@ -16,8 +16,9 @@ private:
     std::priority_queue<Node*, std::vector<Node*>, NodeComparator> openSet;
     bool initialized = false;
     bool finished = false;
-    Node* startNode;
-    Node* endNode;
+    Node* startNode = nullptr;
+    Node* endNode = nullptr;
 public:
     bool update(Grid& grid);
+    void reset() {initialized = false;}
 };
