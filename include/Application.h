@@ -16,5 +16,5 @@ private:
 
 public:
     void run();
-    Application();
+    Application(uint16_t height, uint16_t width, float cellSize);
 };

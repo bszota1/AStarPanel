@@ -1,12 +1,13 @@
 #include "../include/Application.h"
 #include <optional>
 
-Application::Application():
-    grid(30,40,20.0f),
+Application::Application(uint16_t height, uint16_t width, float cellSize):
+    grid(height,width,cellSize),
     currentTool(Tool::Wall),
     isSimulating(false){
-    uint16_t screenWidth = 40 * 20;
-    uint16_t screenHeight = 30 * 20;
+
+    auto screenWidth = static_cast<uint32_t>(width * cellSize);
+    auto screenHeight = static_cast<uint32_t>(height * cellSize);
 
     window.create(sf::VideoMode({screenWidth,screenHeight}),"A* Visualizer");
     window.setFramerateLimit(60);
