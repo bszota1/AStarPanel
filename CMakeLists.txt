@@ -11,6 +11,8 @@ add_executable(AStarPanel src/main.cpp
         include/Node.h
         include/Grid.h
         src/Grid.cpp
+        include/AStar.h
+        src/AStar.cpp
 )
 
 target_include_directories(AStarPanel PRIVATE include .)

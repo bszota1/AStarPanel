@@ -16,6 +16,10 @@ private:
     Node* endNode;
 public:
     Grid(u_int16_t height, u_int16_t width, float cellSize);
+
+    Node* getStart() const { return startNode; }
+    Node* getEnd() const { return endNode; }
+
     void draw(sf::RenderWindow& window);
     void setWall(int mouseX , int mouseY);
     void setStart(int mouseX, int mouseY);
