@@ -1,5 +1,8 @@
 #include "Grid.h"
 
+
+// Initializes Grid object with user given arguments, and initializes deafult Nodes
+
 Grid::Grid(const uint16_t height, const uint16_t width, const float cellSize):
     height {height},
     width {width},
@@ -14,6 +17,8 @@ Grid::Grid(const uint16_t height, const uint16_t width, const float cellSize):
         }
     }
 }
+
+// Uses SFML to draw rectangle with different colours depending on their type
 
 void Grid::draw(sf::RenderWindow& window) {
     sf::RectangleShape rectangle(sf::Vector2f(cellSize - 1.0f, cellSize - 1.0f));
@@ -49,6 +54,8 @@ void Grid::draw(sf::RenderWindow& window) {
     }
 }
 
+// Checks if the mouse is clicikg inside of the window and changing Node type to wall
+
 void Grid::setWall(int mouseX, int mouseY) {
     if (mouseX < 0 || mouseY < 0) return;
 
@@ -63,6 +70,8 @@ void Grid::setWall(int mouseX, int mouseY) {
     }
 }
 
+// Checks if the mouse is clicikg inside of the window and changing Node isWall flag to false
+
 void Grid::removeWall(int mouseX, int mouseY) {
     if (mouseX < 0 || mouseY < 0) return;
 
@@ -76,6 +85,10 @@ void Grid::removeWall(int mouseX, int mouseY) {
         }
     }
 }
+
+// Checks if the mouse is clicikg inside of the window and changing Node type to start
+
+
 void Grid::setStart(int mouseX , int mouseY) {
 
     if (mouseX < 0 || mouseY < 0) return;
@@ -93,6 +106,9 @@ void Grid::setStart(int mouseX , int mouseY) {
 
 }
 
+// Checks if the mouse is clicikg inside of the window and changing Node type to finish
+
+
 void Grid::setEnd(int mouseX , int mouseY) {
 
     if (mouseX < 0 || mouseY < 0) return;
@@ -108,6 +124,8 @@ void Grid::setEnd(int mouseX , int mouseY) {
         endNode = targetNode;
     }
 }
+
+// Returns all available Nodes from current Node
 
 std::vector<Node *> Grid::getNeighbours(Node *node) {
     std::vector<Node *> neighbours;
@@ -129,6 +147,8 @@ std::vector<Node *> Grid::getNeighbours(Node *node) {
     return neighbours;
 }
 
+// Resets all Nodes (for more info look into Node.h)
+
 void Grid::reset() {
     for (uint16_t y = 0; y < height; ++y) {
         for (uint16_t x = 0; x < width; ++x) {
@@ -136,6 +156,8 @@ void Grid::reset() {
         }
     }
 }
+
+// Clears all Nodes (for more info look into Node.h)
 
 void Grid::clear() {
     for (uint16_t y = 0; y < height; ++y) {

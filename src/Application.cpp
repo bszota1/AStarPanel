@@ -1,6 +1,9 @@
 #include "../include/Application.h"
 #include <optional>
 
+
+// Creates window and initializes astar object
+
 Application::Application(uint16_t height, uint16_t width, float cellSize):
     grid(height,width,cellSize),
     currentTool(Tool::Wall),
@@ -13,6 +16,8 @@ Application::Application(uint16_t height, uint16_t width, float cellSize):
     window.setFramerateLimit(60);
 }
 
+// Starts application
+
 void Application::run() {
     while (window.isOpen()) {
         processEvents();
@@ -20,6 +25,8 @@ void Application::run() {
         render();
     }
 }
+
+// Handles user inputs and sets current tool
 
 void Application::processEvents() {
     while (const std::optional event = window.pollEvent()) {

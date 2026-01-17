@@ -1,12 +1,17 @@
 #include <cmath>
 #include "../include/AStar.h"
 
+//  This function returns value of Manhattan heuristic of two Nodes
+
 float AStar::calculateHeuristic(Node *a, Node *b) {
     const int dx = static_cast<int>(a->x) - static_cast<int>(b->x);
     const int dy = static_cast<int>(a->y) - static_cast<int>(b->y);
 
     return static_cast<float>(std::abs(dx) + std::abs(dy));
 }
+
+// This fuction backtracks the path that lead to the end
+// When doing this it changes Node flag (isPath)
 
 void AStar::reconstructPath(Node *endNode) {
     if (!endNode) return;
@@ -18,11 +23,13 @@ void AStar::reconstructPath(Node *endNode) {
     }
 }
 
+// This function compares diofferent Node taking options and chooses this with lowes cost to get to
+
 bool AStar::update(Grid &grid) {
     if (!initialized) {
         grid.reset();
-        startNode = grid.getStart(); //
-        endNode = grid.getEnd();     //
+        startNode = grid.getStart();
+        endNode = grid.getEnd();
 
         if (!startNode || !endNode) return false;
 
@@ -30,10 +37,10 @@ bool AStar::update(Grid &grid) {
 
         startNode->gCost = 0.0f;
         startNode->hCost = calculateHeuristic(startNode, endNode);
-        startNode->updateCost(); //
+        startNode->updateCost();
 
         openSet.push(startNode);
-        startNode->isEnqueued = true; //
+        startNode->isEnqueued = true;
         initialized = true;
         finished = false;
         return false;
@@ -52,19 +59,19 @@ bool AStar::update(Grid &grid) {
             return true;
         }
 
-        auto neighbours = grid.getNeighbours(currentNode); //
+        auto neighbours = grid.getNeighbours(currentNode);
         for (auto &neighbour : neighbours) {
             float tentativeGCost = currentNode->gCost + 1.0f;
 
             if (!neighbour->isVisited && (neighbour->gCost == 0.0f || tentativeGCost < neighbour->gCost)) {
-                neighbour->parent = currentNode; //
+                neighbour->parent = currentNode;
                 neighbour->gCost = tentativeGCost;
                 neighbour->hCost = calculateHeuristic(neighbour, endNode);
-                neighbour->updateCost(); // fCost = g + h
+                neighbour->updateCost();
 
                 if (!neighbour->isEnqueued) {
                     openSet.push(neighbour);
-                    neighbour->isEnqueued = true; //
+                    neighbour->isEnqueued = true;
                 }
             }
         }
